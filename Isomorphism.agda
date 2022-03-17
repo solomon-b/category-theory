@@ -14,7 +14,7 @@ record _≅_ (𝒞 : Category) (A B : ob 𝒞) : Set where
     from : 𝒞 [ B , A ]
     from⨟to : 𝒞 [ from ⨟ to ] ≡ id 𝒞 B
     to⨟from : 𝒞 [ to ⨟ from ] ≡ id 𝒞 A
-open _≅_
+open _≅_ public
 
 infix 5 _[_≅_]
 _[_≅_] : (𝒞 : Category) → ( A B : ob 𝒞 ) → Set
