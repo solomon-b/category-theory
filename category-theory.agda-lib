@@ -1,0 +1,3 @@
+name: category-theory
+depend: standard-library
+include: .
