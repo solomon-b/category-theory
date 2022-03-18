@@ -6,7 +6,7 @@ open import Category
 open import Isomorphism
 
 ------------------------------------------------------------------------------------------
--- Functor
+-- Definition
 
 record Functor (𝒞 : Category) (𝒟 : Category) : Set where
   field
