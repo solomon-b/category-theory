@@ -11,3 +11,5 @@ record NaturalTransformation
   field
     η : ∀ X → 𝒟 [ mapₒ F X , mapₒ G X ]
     commute : ∀ {X Y} (f : 𝒞 [ X , Y ]) → 𝒟 [ mapₘ F f ⨟ η Y ] ≡ 𝒟 [ η X ⨟ mapₘ G f ]
+
+open NaturalTransformation public

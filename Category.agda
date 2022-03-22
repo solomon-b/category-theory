@@ -2,7 +2,9 @@
 module Category where
 
 import Relation.Binary.PropositionalEquality as Eq
-open Eq using (_≡_; refl)
+open Eq using (_≡_; cong; refl; sym)
+
+open import FunExt
 
 ------------------------------------------------------------------------------------------
 -- Category
@@ -42,4 +44,16 @@ unitᵣ Sets = λ f → refl
 unitₗ Sets = λ f → refl
 assoc Sets = λ f g h → refl
 
+-- | The Opposite Category
+Op : (𝒞 : Category) → Category
+Op 𝒞 =
+  record
+    { ob = ob 𝒞
+    ; hom = λ x y → hom 𝒞 y x
+    ; id =  id 𝒞
+    ; _⨟_ = λ f g → 𝒞 [ g ⨟ f ]
+    ; unitᵣ = unitₗ 𝒞
+    ; unitₗ = unitᵣ 𝒞
+    ; assoc = λ f g h → sym (assoc 𝒞 h g f)
+    }
 

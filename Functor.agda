@@ -19,3 +19,4 @@ open Functor public
 
 EndoFunctor : (𝒞 : Category) → Set
 EndoFunctor 𝒞 = Functor 𝒞 𝒞
+
