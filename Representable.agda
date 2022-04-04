@@ -2,6 +2,7 @@
 module Representable where
 
 open import Category
+open import Category.Sets
 open import Functor
 open import Isomorphism
 

@@ -2,7 +2,6 @@
 module Category where
 
 import Relation.Binary.PropositionalEquality as Eq
---open Eq using (_≡_; cong; refl; sym; trans)
 
 open import Relation.Binary
 open import FunExt
@@ -47,31 +46,3 @@ _[_⨟_] 𝒞 f g = _⨟_ 𝒞 f g
 infix 5 _[_≈_]
 _[_≈_] : (𝒞 : Category) → {x y : ob 𝒞} → (f g : hom 𝒞 x y) → Set
 _[_≈_] 𝒞 f g = _≈_ 𝒞 f g
-
--- | The Category of Sets
-Sets : Category
-ob    Sets = Set
-hom   Sets = λ A B → (A → B)
-id    Sets = λ _ x → x
-_⨟_   Sets = λ f g x → g (f x)
-_≈_   Sets = λ f g → ∀ x → f x Eq.≡ g x
-unitᵣ Sets = λ f x → Eq.refl
-unitₗ Sets = λ f x → Eq.refl
-assoc Sets = λ f g h x → Eq.refl
-cong-⨟ Sets {f = f} {i = i} = λ p q x → Eq.trans (q (f x)) (Eq.cong i (p x))
-IsEquivalence.refl (isEquivalence Sets) = λ x → Eq.refl
-IsEquivalence.sym (isEquivalence Sets) = λ prf x → Eq.sym (prf x)
-IsEquivalence.trans (isEquivalence Sets) = λ prf1 prf2 x → Eq.trans (prf1 x) (prf2 x)
-
--- | The Opposite Category
-Op : (𝒞 : Category) → Category
-ob (Op 𝒞) = ob 𝒞
-hom (Op 𝒞) = λ x y → hom 𝒞 y x
-id (Op 𝒞) = id 𝒞
-_⨟_ (Op 𝒞) = λ f g → 𝒞 [ g ⨟ f ]
-_≈_ (Op 𝒞) = λ f g → 𝒞 [ f ≈ g ]
-cong-⨟ (Op 𝒞) = λ f≈h g≈i → cong-⨟ 𝒞 g≈i f≈h
-unitᵣ (Op 𝒞) = unitₗ 𝒞
-unitₗ (Op 𝒞) = unitᵣ 𝒞
-assoc (Op 𝒞) = λ f g h → sym 𝒞 (assoc 𝒞 h g f)
-isEquivalence (Op 𝒞) = isEquivalence 𝒞
