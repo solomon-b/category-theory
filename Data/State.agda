@@ -4,6 +4,7 @@ module Data.State where
 
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Category
+open import Category.Sets
 open import Functor
 open import FunExt
 
@@ -17,6 +18,6 @@ StateFunctor S =
     { mapₒ = λ A → (S → (S × A))
     ; mapₘ = λ f run s →
        case run s of λ{ (s' , x) → s' , (f x) }
-    ; id = refl
-    ; composition = refl
+    ; id = λ _ → refl
+    ; composition = λ _ → refl
     }

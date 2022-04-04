@@ -2,9 +2,11 @@
 module Data.Reader where
 
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
-open import Category
+open import Category.Sets
 open import Functor
 open import FunExt
+
+------------------------------------------------------------------------------------------
 
 ReaderFunctor : (R : Set) → EndoFunctor Sets
 ReaderFunctor R =
