@@ -1,7 +1,6 @@
 {-# OPTIONS --type-in-type #-}
 module NaturalTransformation where
 
-open import Relation.Binary.PropositionalEquality using (_≡_)
 open import Category
 open import Functor
 open import Isomorphism
