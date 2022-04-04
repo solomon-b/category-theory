@@ -11,6 +11,7 @@ ReaderFunctor R =
   record
     { mapₒ = λ A → (R → A)
     ; mapₘ = λ f g r → f (g r)
-    ; id = ∀-extensionality λ f → ∀-extensionality λ r → refl
-    ; composition = ∀-extensionality λ f → refl
+    ; id = λ f → refl
+    ; composition = λ f → refl
+    ; cong-mapₘ = λ prf f → ∀-extensionality (λ x → prf (f x))
     }
