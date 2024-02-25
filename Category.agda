@@ -2,6 +2,7 @@
 module Category where
 
 import Relation.Binary.PropositionalEquality as Eq
+import Relation.Binary.Reasoning.Setoid
 
 open import Relation.Binary
 open import FunExt
@@ -26,7 +27,13 @@ record Category : Set where
     isEquivalence : ∀ {X Y} → IsEquivalence (_≈_ {X} {Y})
     cong-⨟ : ∀ {X Y Z} → {f h : hom X Y} → {g i : hom Y Z} → f ≈ h → g ≈ i → f ⨟ g ≈ h ⨟ i
 
-  module Equiv {A B : ob} = IsEquivalence (isEquivalence {A} {B}) 
+  HomSetoid : ∀ (X Y : ob) → Setoid _ _
+  Setoid.Carrier (HomSetoid X Y) = hom X Y
+  Setoid._≈_ (HomSetoid X Y) = _≈_
+  Setoid.isEquivalence (HomSetoid X Y) = isEquivalence
+
+  module Equiv {A B : ob} = IsEquivalence (isEquivalence {A} {B})
+  module Reasoning {X Y : ob} = Relation.Binary.Reasoning.Setoid (HomSetoid X Y)
 
 open Category public
 open Equiv
